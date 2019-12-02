@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+</head>
+<body>
+        <div>
+            <p>订单支付</p>
+            <p>订单编号：{$order.out_trade_no}</p>
+            <p>订单金额：{$order.pay_amount}元</p>
+        </div>
+        <div>
+            <form action="{:url('pay/pay')}" method="post">
+                <input type="radio" name="paycode" value="alipay" />支付宝<br/>
+                <input type="radio" name="paycode" value="weixin" />微信支付<br/>
+                <input type="hidden" name="oid" value="{$order.id}" />
+                <input type="submit" value="支付" />
+
+            </form>
+        </div>
+
+</body>
+</html>

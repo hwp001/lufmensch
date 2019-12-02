@@ -1,0 +1,89 @@
+{include file="public/header"}
+<form action="{:url('Sumcar/addzero')}" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <b style="margin-left: 120px;">新增车辆：</b>
+        <tr>
+            <td class="tableleft">车牌号：</td>
+            <td >
+                <select  name='carOne' style="width: 70px;height: 25px" required>
+                    <option value="" checked>请选择</option>
+                    {foreach $carOnes as $carOne}
+                    <option>{$carOne}</option>
+                    {/foreach}
+                </select>
+                <select  name='carTwo' style="width: 70px;height: 25px" required>
+                    <option value="" checked>请选择</option>
+                    {foreach $carTwos as $carTwo}
+                    <option>{$carTwo}</option>
+                    {/foreach}
+                </select>
+                <input id="" type="text" name="carThree" placeholder="请输入车牌号后五位"   required/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">一级分类：</td>
+            <td >
+                <select id="oilP" name='oilP' style="width: 169px;height: 25px" required>
+                    {foreach $oils as $oil}
+                    <option>{$oil.name}</option>
+                    {/foreach}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">二级分类：</td>
+            <td >
+                <select id="oilC" name='oilC' style="width: 169px;height: 25px" required>
+                    <option value="" checked>-------请选择-------</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">司机姓名：</td>
+            <td><input id="" type="text" name="driverName" placeholder="请输入司机姓名" required/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">手机号码：</td>
+            <td><input id="" type="text" name="driverPhone" placeholder="请输入手机号码" required/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">预约时间：</td>
+            <td><input id="" type="datetime-local" name="order_time" placeholder="请输入预约时间" required/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">新增</button>&nbsp;&nbsp;
+                <a href="./index.php"><button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--包含尾部文件-->
+<script>
+    $('#oilP').click(function(){
+        var oilP = $('#oilP').val();
+        $.ajax({
+            url      : "{:url('Oils/category')}",
+            data     : {"oilP":oilP},
+            type     : "post",
+            dataType : "json",
+            success  : function(data){
+                if (data.code == 1) {
+                    // alert(JSON.stringify(data));
+                    var htm;
+                    for (var i=0;i<data.value.length;i++){
+                        htm += "<option >"+data.value[i].name+"</option>" ;
+                    }
+                    //html 若标签为空 则增加 若标签不为空 则覆盖
+                    $("#oilC").html(htm);
+                } else {
+                    alert('数据获取失败');
+                }
+            }
+        });
+    });
+    </script>
+

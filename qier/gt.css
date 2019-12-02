@@ -1,0 +1,18 @@
+.gt{
+	bottom:95px;
+    display:block;
+    height:100px;
+    position:fixed;
+    width:100px;
+    z-index: 2;
+}
+.cb{
+	bottom:200px;
+    display:block;
+    height:100px;
+    position:absolute;
+    width:100px;
+    right: 120px;
+    z-index: 3;
+    cursor:pointer;
+}

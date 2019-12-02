@@ -1,0 +1,64 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{}" method="post">
+    <select name="keyword" style="height: 27px;">
+        <option selected>用户账号：</option>
+        <option>用户角色：</option>
+        <option>用户地址：</option>
+    </select>
+    <input type="text" name="key" id="userName"class="abc input-default" placeholder="" value=""> &nbsp; &nbsp;
+    日期范围：
+    <input type="datetime-local" name="start_time" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;--
+    <input type="datetime-local" name="end_time" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>用户账号</th>
+        <th>用户角色</th>
+        <th>操作描述</th>
+        <th>地址</th>
+        <th>操作时间</th>
+        <th>状态</th>
+        <th>Ip地址</th>
+        <th>操作</th>
+    </tr>
+    {volist name="logs" id="log"}
+    <tr>
+        <td>{$log.userName}{$log.id}</td>
+        <td>{$log.roleName}</td>
+        <td>{$log.operation}</td>
+        <td>{$log.station}</td>
+        <td>{$log.create_time}</td>
+        <td>{$log.state}</td>
+        <td>{$log.Ip}</td>
+        <td><a onclick="del('{$log.id}')" href="javascript:void(0)">删除</a> </td>
+    </tr>
+    {/volist}
+    </thead>
+</table>
+ <center>{$logs|raw}</center>
+
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="add.html";
+        });
+    });
+    function del(id){
+        if (confirm('是否要删除')) {
+            $.ajax({
+                url : "{:url('Log/del')}",
+                data : {id : id},
+                type : 'post',
+                dataType: "json",
+                success : function(data){
+                   alert(data.msg);
+                }
+            });
+        }
+    }
+</script>

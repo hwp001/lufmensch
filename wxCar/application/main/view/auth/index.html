@@ -1,0 +1,47 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Auth/add')}" method="get">
+    <button type="button" class="btn btn-success" id="addnew" >新增权限</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>权限名称</th>
+        <th>节点</th>
+        <th>添加时间</th>
+        <th>排序</th>
+        <th>操作</th>
+    </tr>
+    {volist name="auths" id="auth"}
+    <tr>
+            {foreach $authTpl as $k => $v}
+                {if $auth.name == $v}
+                    <td>{$k}</td>
+                {/if}
+            {/foreach}
+        <td>{$auth.pid}</td>
+        <td>{$auth.create_time}</td>
+        <td>{$auth.orderList}</td>
+        <td>编辑|删除|添加</td>
+    </tr>
+    {/volist}
+    </thead>
+</table>
+}
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Auth/add')}";
+        });
+    });
+    function del(id)
+    {
+        if(confirm("确定要删除吗？"))
+        {
+            var url = "index.html";
+            window.location.href=url;
+        }
+    }
+</script>

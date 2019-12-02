@@ -1,0 +1,45 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="" method="post">
+    用户名：
+    <input type="text" name="key" id="username"class="abc input-default" placeholder="" $="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-success" id="addnew" >未定</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>司机头像</th>
+        <th>司机账号</th>
+        <th>手机号</th>
+        <th>所在企业</th>
+        <th>注册时间</th>
+        <th>车牌号</th>
+        <th>真实姓名</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    {volist name="drivers" id="driver"}
+        <tr>
+            <td><img src="{$driver.imageUrl}" style="height: 50px;width: 50px"></td>
+            <td>{$driver.name}</td>
+            <td>{$driver.phone}</td>
+            <td>{$driver.company}</td>
+            <td>{$driver.create_time}</td>
+            <td>{$driver.license}</td>
+            <td>{$driver.trueName}</td>
+            <td>{$driver.state}</td>
+            <td>操作</td>
+        </tr>
+    {/volist}
+    </thead>
+</table>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Node/add')}";
+        });
+    });
+</script>

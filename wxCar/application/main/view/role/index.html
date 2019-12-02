@@ -1,0 +1,49 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Role/add')}" method="get">
+    角色名称：
+    <input type="text" name="key" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-success" id="addnew" >新增角色</button>
+    <button type="button" class="btn btn-success" id="getAuth" >权限分配</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>角色名称</th>
+        <th>权限分配</th>
+        <th>添加时间</th>
+        <th>更新时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    {volist name="roles" id="role"}
+    <tr>
+        <td>{$role.name}</td>
+        {foreach $roleAuths as $roleA}
+            {if  $roleA.id == $role.id}
+                <td>{$roleA.roleName}</td>
+                {else /} <td>暂无权限</td>
+            {/if}
+        {/foreach}
+        <td>{$role.create_time}</td>
+        <td>{$role.update_time}</td>
+        <td>{$role.state}</td>
+        <td>操作</td>
+    </tr>
+    {/volist}
+    </thead>
+</table>
+<center>{$roles|raw}</center>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Role/add')}";
+        });
+        $('#getAuth').click(function(){
+            window.location.href = "{:url('Role/role_auth')}";
+        });
+    });
+</script>

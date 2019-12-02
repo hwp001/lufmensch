@@ -1,0 +1,38 @@
+{include file="public/header"}
+<body>
+<form action="{:url('Role/add')}" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr><b style="margin-left: 110px;height: 90px;">新增角色</b></tr>
+        <tr>
+                <td style="width:100px" class="tableleft">角色名称:</td>
+                <td><input type="text" name="name" placeholder="请输入中文字符" style="height: 30px;" /></td>
+        </tr>
+        <tr>
+                <ul>
+                    <td class="tableleft">状态操作：</td>
+                    <td>
+                        <input type="radio" name="state" value="1" checked /> 启用
+                        <input type="radio" name="state" value="0" /> 禁用
+                    </td>
+                </ul>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $(':checkbox[name="group[]"]').click(function () {
+            $(':checkbox', $(this).closest('li')).prop('checked', this.checked);
+        });
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+    });
+</script>

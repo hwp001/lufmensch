@@ -1,0 +1,61 @@
+{include file="public/header"}
+<body>
+<form action="{:url('Role/role_auth')}" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr><b style="margin-left: 110px;height: 90px;">权限分配</b></tr>
+        <tr>
+            <td style="width:100px" class="tableleft">角色名称:</td>
+            <td>
+                <select name="roleId">
+                    {foreach $roles as $role}
+                        {if $role.name != "超级管理员"}
+                        <option value="{$role.id}">
+                                {$role.name}
+                        </option>
+                         {/if}
+                    {/foreach}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px" class="tableleft">权限选择:</td>
+            <td>
+                {foreach $auths as $auth}
+                <input type="checkbox" name="auth[]" value="{$auth.id}" checked>
+                    {foreach $authTpl as $k => $v}
+                        {if $auth.name == $v}
+                            {$k} <br>
+                         {/if}
+                    {/foreach}
+                {/foreach}
+            </td>
+        </tr>
+        <!--<tr>-->
+            <!--<ul>-->
+                <!--<td class="tableleft">状态操作：</td>-->
+                <!--<td>-->
+                    <!--<input type="radio" name="state" value="1" checked /> 启用-->
+                    <!--<input type="radio" name="state" value="0" /> 禁用-->
+                <!--</td>-->
+            <!--</ul>-->
+        <!--</tr>-->
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">保存</button> &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $(':checkbox[name="group[]"]').click(function () {
+            $(':checkbox', $(this).closest('li')).prop('checked', this.checked);
+        });
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+    });
+</script>

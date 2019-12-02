@@ -1,0 +1,47 @@
+{include file="public/header"}
+<form action="{:url('Car/add')}" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <b style="margin-left: 120px;">新增车辆：</b>
+        <tr>
+            <td class="tableleft">车牌号：</td>
+            <td >
+                <select  name='carOne' style="width: 70px;height: 25px" required>
+                    <option value="" checked>请选择</option>
+                    {foreach $carOnes as $carOne}
+                        <option>{$carOne}</option>
+                    {/foreach}
+                </select>
+                <select  name='carTwo' style="width: 70px;height: 25px" required>
+                    <option value="" checked>请选择</option>
+                    {foreach $carTwos as $carTwo}
+                        <option>{$carTwo}</option>
+                    {/foreach}
+                </select>
+                <input id="secondId" type="text" name="carThree" placeholder="请输入车牌号后五位"   required/>
+            </td>
+        </tr>
+
+        <tr>
+            <td  class="tableleft">状态操作：</td>
+            <td >
+                <input id="fiveId" type="radio" name="state" value="1" checked/> 启用
+                <input id="sixId" type="radio" name="state" value="0"/> 禁用
+            </td>
+        </tr>
+
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;
+                <a href="./index.php"><button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--包含尾部文件-->
+<script>
+
+</script>
+

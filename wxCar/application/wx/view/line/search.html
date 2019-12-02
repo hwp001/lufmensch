@@ -1,0 +1,105 @@
+{include file="public/header"}
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/index.css">
+<title>车辆运货预约</title>
+</head>
+<body>
+
+<div id="main" >
+    <form action="{:url('Line/search')}" method="post">
+        <div id="box" class="box" v-show="boxDp">
+            <div id="wrap" class="wrap">
+                <div id="start" class="start">
+                    <span>告示：</span>请把微信姓名改成真实姓名
+                </div>
+            </div>
+        </div>
+        <div id="top">
+            <img src="__STATIC__/wx/images/banner.png" class="topImg">
+            <p style="text-align: center;color: #333;height: 0.7rem;line-height: 0.7rem;font-size: .4rem; background-color: #fff;width: 90%;margin: 0 auto;padding: .1rem .2rem;">二甲苯装车排队情况</p>
+            <div class="search">
+                <div class="searchCon">
+                    <!-- <span class="sx" @click="sxBtn">筛选</span> -->
+                    <input type="text" placeholder="请输入你想搜索的内容" class="weui-input" style="width: 320px" name="search">
+                    <button type="submit" style="height: 40px;cursor: pointer;">搜索</button>
+                    <div class="refresh">
+                        <button type="button" onclick="refresh()" style="height: 40px;cursor: pointer;">刷新</button>
+                    </div>
+                </div>
+            </div>
+            <div class="search" >
+                <div class="searchCon-right">
+                    <select id="oilP"  name="oilP" class="weui-select " >
+                        <option checked>请选择类型</option>
+                        {foreach $oils as $oil}
+                        <option >{$oil.name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="searchCon-right">
+                    <select id="oilC" name="oilC" class="weui-select weui-cell__bd"  >
+                        <option value="">请选择类型</option>
+                    </select>
+                </div>
+            </div>
+    </form>
+</div>
+
+<div class="list" style="height:8rem">
+
+    {if $dataType != 'noInfo'}
+        {foreach $orders as $order}
+        <div class="line">
+            <span class="num {$order.color}" >{$order.orderState}</span>
+            <div>
+                <span class="chepai" style="font-size: 18px;position: relative;top: -10px">{$order.license}</span>
+                <span class="chepai" style="font-size: 18px;position: relative;top: 15px;left: -107px">{:date('Y.m.d H:i',$order.order_time)}</span>
+            </div>
+
+            <span class="statu {$order.font_color}" >{$order.ssr}</span>
+        </div>
+        {/foreach}
+    {/if}
+    <div id="footer">
+        <a href="{:url('Logic/line')}" class="on">
+            <img src="__STATIC__/wx/images/paiduichaxun2.png" alt="">
+            <p>排队查询</p>
+        </a>
+        <a href="{:url('Logic/order')}">
+            <img src="__STATIC__/wx/images/yuyue.png" alt="">
+            <p>预约装车</p>
+        </a>
+        <a href="{:url('Logic/mine')}">
+            <img src="__STATIC__/wx/images/gerenzhongxin.png" alt="">
+            <p>个人中心</p>
+        </a>
+    </div>
+</div>
+{include file="public/footer"}
+<script>
+    $('#oilP').click(function(){
+        var oilP = $('#oilP').val();
+        $.ajax({
+            url      : "{:url('Oils/category')}",
+            data     : {"oilP":oilP},
+            type     : "post",
+            dataType : "json",
+            success  : function(data){
+                if (data.code == 1) {
+                    // alert(JSON.stringify(data));
+                    var htm;
+                    for (var i=0;i<data.value.length;i++){
+                        htm += "<option >"+data.value[i].name+"</option>" ;
+                    }
+                    //html 若标签为空 则增加 若标签不为空 则覆盖
+                    $("#oilC").html(htm);
+                } else {
+                    alert('数据获取失败');
+                }
+            }
+        });
+    });
+    function refresh(){
+        window.location.href = "{:url('logic/line')}";
+    }
+</script>

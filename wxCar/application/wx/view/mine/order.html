@@ -1,0 +1,41 @@
+{include file="public/header"}
+
+    <title>预约记录</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/yuyuejilu.css">
+</head>
+<body>
+<div id="main">
+    {if $orders != 'noInfo'}
+    {foreach $orders as $order}
+    <div class="line">
+        <div class="lineTop">
+            <span class="time">{:date('Y.m.d H:i',$order.order_time)}</span>
+            <span class="statu {$order.font_color}">{$order.ssr}</span>
+        </div>
+        <div class="lineCon">
+            <span class="lineCon-left">油品类型</span>
+            <span class="lineCon-right">{$order.oils}</span>
+        </div>
+        <div class="lineCon">
+            <span class="lineCon-left">车牌号码</span>
+            <span class="lineCon-right">{$order.license}</span>
+        </div>
+        <div class="lineCon">
+            <span class="lineCon-left">公司名称</span>
+            <span class="lineCon-right">{$order.company}</span>
+        </div>
+        <div class="lineCon">
+            <span class="lineCon-left">真实姓名</span>
+            <span class="lineCon-right">{$order.driverName}</span>
+        </div>
+        <div class="lineCon">
+            <span class="lineCon-left">联系电话</span>
+            <span class="lineCon-right">{$order.driverPhone}</span>
+        </div>
+    </div>
+    {/foreach}
+    {/if}
+</div>
+</body>
+<script type="text/javascript" src="__STATIC__/wx/js/vue.min.js"></script>
+</html>

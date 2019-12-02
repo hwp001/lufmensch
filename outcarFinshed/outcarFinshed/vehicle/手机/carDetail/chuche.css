@@ -1,0 +1,65 @@
+
+.top{
+    		padding:0.25rem 0 0 0;
+    	}
+    	.top p{
+    		text-align: center;
+    	}
+    	.top p i{
+    		color:orange;
+    	}
+    	.userInfo{
+    		padding: 0rem .25rem;
+    		color:orange;
+    	}
+    	.userInfo i {
+    		display:block;
+   			width: 1.5rem;
+    		height: 1.5rem;
+    		font-size: 1.5rem;
+    		margin:0 auto;
+		}
+		.userin {
+			float:left;
+			width: 2.0rem;
+    		height: 2.5rem;
+		}
+		.userInfo h1{
+			float:left;
+			width:1.5rem;
+			margin-top:0.75rem;
+			border:1px solid orange;
+		}
+		.userin span {
+    		float: left;
+    		margin-left:0rem;
+    		margin-top: .25rem;
+    		width:2.0rem;
+    		text-align: center;
+		}
+		.bottom{
+			margin-bottom:0.25rem;
+		}
+		.weui-cell::before{
+			border:0px solid red;
+		}
+		.weui-cell__bd::after {
+			content:" ";
+			border-style:none;
+		}
+		.yes{
+			background-color:orange;
+			border-radius: 2rem;
+			border:0px;
+			width:90%;
+			height:1rem;
+			margin:0.2rem 5%;
+
+		}
+		.myIfo{
+			margin-top: 0;
+		}
+		.myIfo i{
+    		font-size: 0.6rem;
+    		color:orange;
+    	}

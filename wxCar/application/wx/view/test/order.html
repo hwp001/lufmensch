@@ -1,0 +1,61 @@
+{include file="public/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/yuyuezhuangche.css">
+<title>预约装车</title>
+</head>
+<style>
+    .weui-mask.weui-mask--visible{
+        opacity: 0.2;
+    }
+</style>
+<body>
+<div id="main">
+
+    <div class="con">
+        <div class="line ">
+            <div class="null">
+                <span class="yuan"></span>
+            </div>
+            <span class="Txt">油品类型</span>
+            <div class="selLine weui-cell__bd">
+                <select   name="oilP" class="weui-select " >
+                    {foreach $oils as $oil}
+                    <option >{$oil.name}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="selLine weui-cell__bd">
+                <select  class="weui-select weui-cell__bd"  >
+                    <option disabled="disabled">请选择类型</option>
+                    <option >二甲苯</option>
+                    <option >粗甲苯</option>
+                </select>
+            </div>
+        </div>
+        <div class="line">
+            <div class="null">
+            </div>
+            <span class="Txt">车牌号</span>
+            <div class="lineC-left">
+                <div v-if="chepai == ''">
+                    <span class="pz" >粤</span>
+                </div>
+                <div v-else>
+                    <span class="pz" >A</span>
+                </div>
+                <input type="text" class="weui-input" placeholder="请输入车牌号" >
+            </div>
+        </div>
+        <div class="line">
+            <div class="null">
+            </div>
+            <span class="Txt">公司名称</span>
+            <input type="text" class="weui-input" placeholder="请输入公司名称">
+        </div>
+    </div>
+    <a href="{:url('logic/line')}" ><div id="sub"  onclick="sub()" class="subBtn"  v-show="subDp">提交预约</div></a>
+    {include file="public/footer"}
+    <script>
+        $('test').blur(function(){
+            alert(123);
+        });
+    </script>

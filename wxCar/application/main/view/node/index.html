@@ -1,0 +1,45 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Node/add')}" method="post">
+    用户名：
+    <input type="text" name="key" id="username"class="abc input-default" placeholder="" $="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-success" id="addnew" >新增管理员</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+        <tr>
+            <th>管理员名称</th>
+            <th>管理员头像</th>
+            <th>管理员角色</th>
+            <th>登录次数</th>
+            <th>上次登录IP</th>
+            <th>上次登录时间</th>
+            <th>真实姓名</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    {volist name="nodes" id="node"}
+        <tr>
+            <td>{$node.name}</td>
+            <td><img src="{$node.imageUrl}" style="height: 50px;width:50px"></td>
+            <td>{$node.roleName}</td>
+            <td>{$node.loginTimes}</td>
+            <td>{$node.Ip}</td>
+            <td>{$node.loginTime}</td>
+            <td>{$node.trueName}</td>
+            <td>{$node.state}</td>
+            <td>编辑|删除|修改</td>
+        </tr>
+    {/volist}
+    </thead>
+</table>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Node/add')}";
+        });
+    });
+</script>

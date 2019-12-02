@@ -1,0 +1,51 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Order/index')}" method="post">
+    关键词：
+    <input type="text" name="key" id="carId"class="abc input-default" placeholder="" $="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+</form>
+<form method="post" action="{:url('Order/InOrder')}" class="form-signin" enctype="multipart/form-data" role="form"  id="form" method="post"style="position: absolute;left: 450px;top: 2px;" method ="post">
+    <input name="excel" type="file" class="form-control excel_path">
+    <input type="submit" value="导入Excel" class="btn btn-lg btn-primary btn-block">
+</form>
+    <table class="table table-bordered table-hover definewidth m10" style="margin-top: 50px">
+        <thead>
+        <tr></th>
+            <th>真实姓名</th>
+            <th>手机号</th>
+            <th>车牌号</th>
+            <th>公司名称</th>
+            <th>油品类型</th>
+            <th>预约状态</th>
+            <th>预约时间</th>
+        </tr>
+        {if $dataOrder != 'noInfo'}
+            {foreach $orders as $order}
+            <tr>
+                <td>{$order.driverName}</td>
+                <td>{$order.driverPhone}</td>
+                <td>{$order.license}</td>
+                <td>{$order.company}</td>
+                <td>{$order.oils}</td>
+                <td>{$order.ssr}</td>
+                <td>{:date('Y.m.d H:i',$order.order_time)}</td>
+            </tr>
+            {/foreach}
+        {/if}
+        </thead>
+    </table>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Car/add')}";
+        });
+        $('#pie').click(function(){
+            var license = $('#carId').val();
+            window.location.href = '/main/car/pie.html?license='+license;
+
+        });
+    });
+</script>

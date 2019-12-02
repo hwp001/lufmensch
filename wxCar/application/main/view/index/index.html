@@ -1,0 +1,78 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="__STATIC__/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="__STATIC__/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="__STATIC__/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <!--<img src="/chinapost/Public/assets/img/top.png">-->
+    </div>
+    <div class="dl-log">欢迎您，黄炜鹏大佬<span class="dl-log-user" style="position:relative;"></span><a href="" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">后台管理</div></li>
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+    </ul>
+</div>
+<script type="text/javascript" src="__STATIC__/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="__STATIC__/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="__STATIC__/assets/js/common/main-min.js"></script>
+<script type="text/javascript" src="__STATIC__/assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[
+                {text:'日志管理',items:[
+                        {id:'12',text:'用户日志',href:"{:url('Log/index')}"}
+                    ]},
+                {text:'系统管理',items:[
+                        {id:'21',text:'管理员管理',href:"{:url('Node/index')}"},
+                        {id:'22',text:'角色管理',href:"{:url('Role/index')}"},
+                        {id:'23',text:'菜单管理',href:"{:url('Auth/index')}"}
+                    ]},
+                {text:'排队查询管理',items:[
+                        {id:'3',text:'车队列表',href:"{:url('Order/line')}"},
+                        {id:'31',text:'车辆导入',href:"{:url('Order/index')}"}
+                    ]
+                },
+                {text:'车辆管理',items:[
+                        {id:'4',text:'车辆信息',href:"{:url('Car/index')}"}
+                    ]},
+                {text:'数据统计管理',items:[
+                        {id:'51',text:'已装完',href:"{:url('Sumcar/Sumzero')}"},
+                        {id:'52',text:'装车中',href:"{:url('Sumcar/Sumone')}"},
+                        {id:'53',text:'厂区待装',href:"{:url('Sumcar/Sumtwo')}"},
+                        {id:'53',text:'厂外待装',href:"{:url('Sumcar/Sumthree')}"}
+                    ]},
+                {text:'用户管理',items:[
+                        {id:'6',text:'司机列表',href:"{:url('Driver/index')}"}
+                    ]},
+                {text:'油品类型管理',items:[
+                        {id:'71',text:'油品类型',href:"{:url('Oils/index')}"}
+                    ]},
+                {text:'广告管理',items:[
+                        {id:'8',text:'广告列表',href:"{:url('Driver/index')}"}
+                    ]}]
+        }];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+<div style="text-align:center;">
+    <p>欢迎您：<a href="http://www.php.cn/" target="_blank">黄炜鹏大佬</a></p>
+</div>
+</body>
+</html>

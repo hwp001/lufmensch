@@ -1,0 +1,111 @@
+{include file="public/header"}
+    <link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/yuyuezhuangche.css">
+    <title>预约装车</title>
+</head>
+<style>
+    .weui-mask.weui-mask--visible{
+        opacity: 0.2;
+    }
+</style>
+<body>
+<form action="{:url('Order/sub')}">
+<div id="main">
+    <div class="con">
+        <div class="line">
+            <div class="null">
+                <span class="yuan"></span>
+            </div>
+            <span class="Txt">真实姓名</span>
+            <input id="test" name="driverName" type="text" class="weui-input" placeholder="请输入真实姓名" value="{$driver.trueName}">
+        </div>
+        <div class="line">
+            <div class="null">
+            </div>
+            <span class="Txt">联系电话</span>
+            <input type="tel" name="driverPhone" class="weui-input" placeholder="请输入联系电话" value="{$driver.phone}">
+        </div>
+    </div>
+    <div class="con">
+        <div class="line ">
+            <div class="null">
+                <span class="yuan"></span>
+            </div>
+            <span class="Txt">油品类型</span>
+            <div class="selLine weui-cell__bd">
+                <select id="oilP"  name="oilP" class="weui-select " >
+                    <option checked>请选择类型</option>
+                    {foreach $oils as $oil}
+                    <option >{$oil.name}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="selLine weui-cell__bd">
+                <select id="oilC" name="oilC" class="weui-select weui-cell__bd"  >
+                    <option value="">请选择类型</option>
+                </select>
+            </div>
+        </div>
+        <div class="line">
+            <div class="null">
+            </div>
+            <span class="Txt">预约时间</span>
+            <input type="datetime-local" class="weui-input" placeholder="" name="order_time">
+        </div>
+        <div class="line ">
+            <div class="null">
+            </div>
+            <span class="Txt">车牌号</span>
+            <div class="lineC-left">
+                    <div v-if="chepai == ''">
+                        <select  name="carOne" class="weui-select pz" style="width: 30px;margin-right: 15px">
+                            {foreach $One as $one}
+                            <option >{$one}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div v-else>
+                <select name="carTwo" class="weui-select pz" style="width: 30px; margin-right: 14px">
+                        {foreach $Two as $two}
+                        <option >{$two}</option>
+                        {/foreach}
+                    </select>
+                    </div>
+                <div><input type="text" name="carThree" class="weui-input" placeholder="请输入车牌号" ></div>
+            </div>
+        </div>
+
+        <div class="line">
+            <div class="null">
+            </div>
+            <span class="Txt">公司名称</span>
+            <input type="text" class="weui-input" placeholder="请输入公司名称" name="company">
+        </div>
+
+    </div>
+    <div style="position:relative;left: 100px;"><button type="submit"class="subBtn" style="cursor:pointer">提交预约</button></div>
+</form>
+{include file="public/footer"}
+    <script>
+        $('#oilP').click(function(){
+            var oilP = $('#oilP').val();
+            $.ajax({
+                url      : "{:url('Oils/category')}",
+                data     : {"oilP":oilP},
+                type     : "post",
+                dataType : "json",
+                success  : function(data){
+                   if (data.code == 1) {
+                      // alert(JSON.stringify(data));
+                      var htm;
+                      for (var i=0;i<data.value.length;i++){
+                          htm += "<option >"+data.value[i].name+"</option>" ;
+                      }
+                        //html 若标签为空 则增加 若标签不为空 则覆盖
+                        $("#oilC").html(htm);
+                   } else {
+                       alert('数据获取失败');
+                   }
+                }
+            });
+        });
+    </script>

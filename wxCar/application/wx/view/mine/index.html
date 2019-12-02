@@ -1,0 +1,35 @@
+{include file="public/header"}
+    <title>我的信息</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/myInfo.css">
+</head>
+<body>
+<div id="main">
+    <form action="{:url('Mine/updateInfo')}" method="post">
+    <div class="con">
+        <div class="line">
+            <span>真实姓名</span>
+            <input type="text" name="trueName"  class="weui-input" value="{$driver.trueName}">
+        </div>
+        <div class="line">
+            <span>联系电话</span>
+            <input type="tel" name="phone"  class="weui-input"  value="{$driver.phone}">
+        </div>
+        <div class="line">
+            <span>车牌号</span>
+            <input type="text" name="license"  class="weui-input"  value="{$driver.license}">
+        </div>
+        <div class="line">
+            <span>公司名称</span>
+            <input type="text" name="company"  class="weui-input"  value="{$driver.company}" >
+        </div>
+
+    </div>
+        <div style="position:relative;left: 100px;"><button type="submit"class="subBtn" style="cursor:pointer">确定修改</button></div>
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="__STATIC__/wx/js/vue.min.js"></script>
+<script src="__STATIC__/wx/js/jquery.min weui.js"></script>
+<script src="__STATIC__/wx/js/jquery-weui.min.js"></script>
+
+</html>

@@ -1,0 +1,50 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Sumzero/zero')}" method="post">
+    车牌号：
+    <input type="text" name="key" id="key"class="abc input-default" placeholder="">&nbsp;&nbsp;
+    <button type="button" onclick='cha()' class="btn btn-primary">查询</button>
+    <button type="button" class="btn btn-success" id="addnew" >新增车辆</button>
+</form>
+<form action="{:url('Car/export')}" method="post">
+    <table class="table table-bordered table-hover definewidth m10">
+        <button type="submit" class="btn btn-success"  >导出车辆</button>
+        <thead>
+        <tr>
+            <th><center><input id="boss" type="checkbox"/></center></th>
+            <th>车辆编号</th>
+            <th>车牌号</th>
+            <th>车辆状态</th>
+            <th>操作</th>
+        </tr>
+        {if $dataCar != 'noInfo'}
+        {foreach $cars as $car}
+        <tr>
+            <td><center><input id="car" name="data[]" type="checkbox" value="{$car.id}"/></center></td>
+            <td>{$car.id}</td>
+            <td>{$car.license}</td>
+            <td>已装完</td>
+            <td>编辑|删除|详情</td>
+        </tr>
+        {/foreach}
+        {/if}
+        </thead>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Sumcar/addzero')}";
+        });
+        $('#boss').click(function(){
+            $("input[id='car']").attr("checked","true");
+        });
+    });
+    function cha(){
+        var key = $('#key').val();
+        // alert(key);
+        window.location.href = "/main/sumcar/sumzero.html?key="+key;
+    }
+</script>

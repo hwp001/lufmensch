@@ -1,0 +1,107 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Order/line')}" method="post">
+    <select name="orderState" style="height: 27px;">
+        <option value="0"  selected>全部车辆</option>
+        <option value="1" >正在装车</option>
+        <option value="2" >厂内待装</option>
+        <option value="3" >厂外待装</option>
+    </select>&nbsp;
+    日期范围：
+    <input type="datetime-local" name="start_time" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;--
+    <input type="datetime-local" name="end_time" class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>车牌号</th>
+        <th>车辆状态</th>
+        <th>操作</th>
+    </tr>
+    {volist name='lines' id="line"}
+        <tr>
+            <td>{$line.license}</td>
+            <td> <button type="button" class="btn btn-primary {$line.color}" style="color: #0C0C0C;font-weight: bold">{$line.ssr}</button></td>
+            <td>
+                <button onclick='back(this)' value="{$line.license}" type="button" class="btn btn-primary" style="color: #0C0C0C;font-weight: bold">后撤</button>
+
+                <button onclick='pause(this)' value="{$line.license}" type="button" class="btn btn-primary" style="color: #0C0C0C;font-weight: bold">暂停</button>
+
+                <button onclick='modify(this)' value="{$line.license}|{$line.orderState}" type="button" class="btn btn-primary" style="color: #0C0C0C;font-weight: bold">修改</button>
+
+                <button onclick='del(this)' value="{$line.license}" type="button" class="btn btn-primary" style="color: #0C0C0C;font-weight: bold">删除</button>
+            </td>
+        </tr>
+    {/volist}
+    </thead>
+</table>
+
+
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="add.html";
+        });
+
+    });
+    //删除
+    function del(obj){
+        var val = obj.value;
+        if (confirm('是否要删除')) {
+            $.ajax({
+                url : "{:url('Order/del')}",
+                data : {license : val},
+                type : 'post',
+                dataType: "json",
+                success : function(data){
+                    alert(data.msg);
+                    window.location.href = "{:url('line')}";
+                }
+            });
+        }
+    }
+    //暂停
+    function pause(obj){
+        var val = obj.value;
+        if (confirm('是否要暂停')) {
+            $.ajax({
+                url : "{:url('Order/pause')}",
+                data : {license : val},
+                type : 'post',
+                dataType: "json",
+                success : function(data){
+                    alert(data.msg);
+                    window.location.href = "{:url('line')}";
+                }
+            });
+        }
+    };
+
+    //后撤
+    function back(obj){
+        var val = obj.value;
+        if (confirm('是否要后撤')) {
+            $.ajax({
+                url : "{:url('Order/back')}",
+                data : {license : val},
+                type : 'post',
+                dataType: "json",
+                success : function(data){
+                    alert(data.msg);
+                    window.location.href = "{:url('line')}";
+                }
+            });
+        }
+    }
+
+    //修改
+    function modify(obj){
+        var license = obj.value;
+        window.location.href = "/main/order/edit.html?license="+license;
+    }
+
+
+</script>

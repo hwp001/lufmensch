@@ -1,0 +1,71 @@
+{include file="public/header"}
+
+    <link rel="stylesheet" type="text/css" href="__STATIC__/wx/css/myCenter.css">
+    <title>个人中心</title>
+</head>
+<body>
+<div id="main">
+    <div class="top">
+        <div class="userInfo">
+            <img src="{$driver.imageUrl}">
+            <span>{$driver.name}</span>
+        </div>
+        <a href="{:url('Mine/order')}" class="l weui-cell__bd">我的预约记录</a>
+    </div>
+   {if $driverOrder != 'noInfo'}
+        <div class="carInfo">
+            <span class="num numIng" v-if="statu == 1">{$driverOrder.orderState}</span>
+            <span class="chepai">{$driverOrder.license}</span>
+            <span class="statu {$driverOrder.font_color}">{$driverOrder.ssr}</span>
+        </div>
+    {else /}
+        <div class="carInfo">暂无预约信息</div>
+    {/if}
+
+    <div class="myIfo">
+        <a href="{:url('Mine/index')}" class="l m weui-cell__bd">
+            <span>我的信息</span>
+            <span>去编辑</span>
+        </a>
+        <div class="line">
+            <div class="line-left">
+                <span>真实姓名</span>
+                <p>{$driver.trueName}</p>
+            </div>
+            <div class="line-right">
+                <span>联系电话</span>
+                <p>{$driver.phone}</p>
+            </div>
+        </div>
+        <div class="line">
+            <div class="line-left">
+                <span>车牌号</span>
+                <p>{$driver.license}</p>
+            </div>
+            <div class="line-right">
+                <span>公司名称</span>
+                <p>{$driver.company}</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+        <a href="{:url('Advertise/index')}" class="weui-cell__bd">联系我们</a>
+        <a href="{:url('Advertise/contract')}" class="weui-cell__bd">关于我们</a>
+    </div>
+    <div id="footer">
+        <a href="{:url('line')}" >
+            <img src="__STATIC__/wx/images/paiduichaxun.png" alt="">
+            <p>排队查询</p>
+        </a>
+        <a href="{:url('order')}">
+            <img src="__STATIC__/wx/images/yuyue.png" alt="">
+            <p>预约装车</p>
+        </a>
+        <a href="{:url('mine')}" class="on">
+            <img src="__STATIC__/wx/images/gerenzhongxin2.png" alt="">
+            <p>个人中心</p>
+        </a>
+    </div>
+
+</div>
+{include file="public/footer"}

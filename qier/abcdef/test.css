@@ -1,0 +1,11 @@
+.input-b ul{
+	width: 100px;
+	height: 180px;
+}
+.input-b ul li{
+	height: 30px;
+	background: #efefef;
+	border: 1px solid red;
+	text-align: center;
+	line-height: 30px;;
+}

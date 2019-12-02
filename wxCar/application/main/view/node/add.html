@@ -1,0 +1,74 @@
+{include file="public/header"}
+
+<form action="{:url('Node/add')}" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <b style="margin-left: 120px;">管理员</b>
+        <tr>
+            <td class="tableleft">头 &nbsp;&nbsp;&nbsp;&nbsp; 像：</td>
+            <!--
+            思路：
+            1、先把图片上传到后台，后台处理之后，把图片地址保存本地
+            2、然后将本地地址赋给input src  value
+            3、然后点击入驻的时候，再把商家信息存到数据库
+            -->
+            <td>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">    <!--预览图-->
+                    <input id="file_upload"  type="file" multiple="true" >   <!--默认写法，form表单可以不用写enctype-->
+                    <input id="file_upload_image" name="imageUrl" type="hidden" multiple="true" value="">   <!--保存存储路径 -->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">角 &nbsp;&nbsp;&nbsp;&nbsp; 色：</td>
+            <td>
+                <select name='roleId' style="width: 149px;height: 25px">
+                    <option value="">-------请选择-------</option>
+                    {volist name="roleAuths" id="roleA" }
+                        <option value="{$roleA.id}">{$roleA.name}</option>
+                    {/volist}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">真实姓名：</td>
+            <td><input type="text" name="trueName" placeholder="请输入姓名" required/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">账号名称：</td>
+            <td><input type="text" name="name" placeholder="请输入账号"  required /></td>
+        </tr>
+        <tr>
+            <td class="tableleft">使用密码：</td>
+            <td><input type="text" name="pwd" placeholder="请输入密码" required/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">确认密码：</td>
+            <td><input type="text" name="pwd_confirm" placeholder="请输入密码" required/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">状态操作：</td>
+            <td>
+                <input type="radio" name="state" value="1" checked/> 启用
+                <input type="radio" name="state" value="0"/> 禁用
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">保存</button>&nbsp;&nbsp;
+                <a href="./index.php"><button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--包含尾部文件-->
+<script>
+    var SCOPE = {
+        image_upload :"{:url('api/image/upload')}",
+    };
+</script>
+{load href="__STATIC__/uploadify/jquery.uploadifive.js" /}
+{load href="__STATIC__/image.js" /}

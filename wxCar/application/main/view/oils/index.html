@@ -1,0 +1,41 @@
+{include file="public/header"}
+<body>
+<form class="form-inline definewidth m20" action="{:url('Oils/add')}" method="get">
+    油品名称：
+    <input type="text" name="key" id="username"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-success" id="addnew" >新增油品</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+        <tr>
+            <th>油品类名</th>
+            <th>所属分类</th>
+            <th>油品库存</th>
+            <th>油品实际库存</th>
+            <th>新增时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {volist name="oils" id="oil"}
+        <tr>
+            <td>{$oil.name}</td>
+            <td>{$oil.pid}</td>
+            <td>{$oil.count}</td>
+            <td>{$oil.trueCount}</td>
+            <td>{$oil.create_time}</td>
+            <td>{$oil.state}</td>
+            <td>编辑|修改|删除</td>
+        </tr>
+         {/volist}
+    </thead>
+</table>
+
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addnew').click(function(){
+            window.location.href="{:url('Oils/add')}";
+        })});
+</script>

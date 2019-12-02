@@ -1,0 +1,35 @@
+{include file="public/header"}
+<form action="{:url('Order/edit')}" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td  class="tableleft">车牌号：</td>
+            <td>
+                <input id="secondId" type="text" name="license" placeholder="" value="{$license}"   readonly/>
+            </td>
+        </tr>
+        <tr>
+            <td  class="tableleft">状态操作：</td>
+            <td>
+                <input  type="radio" name="orderState" value="0" {$ssr.zero}/> 已完成 <br/>
+                <input  type="radio" name="orderState" value="1" {$ssr.one}/> 正在装车 <br/>
+                <input  type="radio" name="orderState" value="2" {$ssr.two}/> 厂区待装 <br/>
+                <input  type="radio" name="orderState" value="3" {$ssr.three}/> 厂外待装 <br/>
+                <input  type="radio" name="orderState" value="4" {$ssr.four}/> 正在暂停 <br/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary" type="button">修改</button>&nbsp;&nbsp;
+                <a href="./index.php"><button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button></a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<!--包含尾部文件-->
+<script>
+
+</script>
+

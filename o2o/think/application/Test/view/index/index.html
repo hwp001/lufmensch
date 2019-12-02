@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试折线图</title>
+</head>
+<body>
+<!--startprint1-->
+    <fieldset class="layui-elem-field" style="text-align: center;">
+        <p style="font-size:24px;">近一周访问人数</p>
+        <div id="container" style="height: 450px;width: 100%;"></div>
+    </fieldset>
+    <button type="button" class="btn btn-primary" id="myid" onclick="preview(1)" >打印</button>
+<!--endprint1-->
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+{load href="__STATIC__/admin/js/echarts.min.js"}
+<script>
+    //打印
+    function preview(oper) {
+        if(oper < 10) {
+            bdhtml =window.document.body.innerHTML;//获取当前页的html代码
+            sprnstr = "<!--startprint" + oper + "-->";//设置打印开始区域
+            eprnstr = "<!--endprint" + oper + "-->";//设置打印结束区域
+            prnhtml =bdhtml.substring(bdhtml.indexOf(sprnstr) + 18); //从开始代码向后取html
+            prnhtml = prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+            window.document.body.innerHTML= prnhtml;
+            window.print();
+            window.document.body.innerHTML =bdhtml;
+        } else{
+            window.print();
+        }
+    }
+</script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('container'));
+    var app = {};
+    var atime="{$atime}";
+    var avg="{$avg}";
+    atime=atime.split(",");
+    avg=avg.split(",");
+    option = null;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: atime
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name:'访问量',
+            data: avg,
+            type: 'line',
+            // 显示数值
+            itemStyle : { normal: {label : {show: true}}}
+        }],
+
+    };
+
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>

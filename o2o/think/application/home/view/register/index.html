@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="__STATIC__/index/css/base.css" />
+    <link rel="stylesheet" href="__STATIC__/index/css/register.css" />
+    <script type="text/javascript" src="__STATIC__/index/js/html5shiv.js"></script>
+    <script type="text/javascript" src="__STATIC__/index/js/respond.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/index/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="head">
+            <ul>  
+                <li><a href="index.html"><img src="__STATIC__/index/image/logo.png" alt="logo"></a></li>
+                <li class="divider"></li>
+                <li><a href="index.html"></a></li>
+            </ul>
+            <div class="login-link">
+                <span>我已注册，现在就</span>
+                <a href="login.html">登录</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <form action="{:url('register/register')}" method = 'post'>
+                <p class="pass-form-item">
+                    <label class="pass-label">用户名</label>
+                    <input type="text" name="username" class="pass-text-input" placeholder="请设置用户名">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">电话号码</label>
+                    <input id="phone" type="text" name="mobile" class="pass-text-input" placeholder="电话号码">
+                    <input type="button" id="btn" value="获取验证码" onclick="sendcode()" />
+                </p>
+                
+                <p class="pass-form-item">
+                    <label class="pass-label">密码</label>
+                    <input type="password" name="password" class="pass-text-input" placeholder="请设置登录密码">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">确认密码</label>
+                    <input type="password" name="repassword" class="pass-text-input" placeholder="请设置登录密码">
+                </p>
+                <p class="pass-form-item">
+                    <label class="pass-label">验证码</label>
+                    <input type="text" name="code" class="pass-text-input " placeholder="请输入验证码">
+                </p>
+                
+                <p class="pass-form-item">
+                    <input type="submit" value="注册" class="pass-button">
+                </p>
+            </form>
+           
+        </div>
+
+        <div class="foot">
+            <div>
+                <div>2016&nbsp;©Baidu</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var time = 60;
+    function sendcode()
+    {
+        var btn = $('#btn');
+        //发送短信
+        sendInfo();
+        //设置时间
+        settime(btn);
+    }
+    function settime(obj)
+    {
+        if (time == 0) {
+            obj.val("发送验证码");
+            obj.attr("disabled",false);
+            time = 60;
+            return;
+        } else {
+            obj.attr("disabled",true);
+            obj.val(time+"s");
+            time--;
+        }
+        setTimeout(function (){
+            settime(obj)
+        },1000);
+    }
+    function sendInfo()
+    {
+       var phone = $('#phone').val(); //获取电话号码
+        //ajax把数据传给后台后，必须要回收后台的结果，不能有来无回，总要意思一下
+        $.ajax({
+            url:"{:url('api/phone/sendInfo')}",
+            type:'post',
+            dataType:"json",
+            data:{phone:phone},
+            success:function(data) {
+                if (data.code == 1){
+                    alert('短信发送成功');
+                } else {
+                    alert('短信发送失败');
+                }
+            }
+
+        });
+    }
+</script>
